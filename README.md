@@ -42,6 +42,33 @@ The text file will have the following properties:
 * Any given line will fit into memory.
 * The line is valid ASCII (e.g. not Unicode).
 
+
+# Example
+
+Suppose the given file is:
+```
+the
+quick brown
+fox jumps over the
+lazy dog
+```
+
+Then you could imagine the following transcript with your server:
+```
+    Client => GET 1
+    Server <= OK
+    Server <= the
+    Client => GET -3
+    Server <= ERR
+    Client => GET 4
+    Server <= OK
+    Server <= lazy dog
+    Client => QUIT
+<<`Server disconnects from client 1 >>
+    Client => SHUTDOWN
+<<`Server disconnects from ALL clients >>
+```
+
 # Execution Environment
 
 You may assume that your system will execute on a machine with the following
