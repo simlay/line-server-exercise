@@ -20,7 +20,7 @@ async fn single_client_test() {
         .expect("Failed to connect to server");
 
     stream
-        .write("GET 1\n".as_bytes())
+        .write_all("GET 1\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let mut buf = [0; 128];
@@ -35,7 +35,7 @@ async fn single_client_test() {
         .await
         .expect("Failed to connect to server");
     stream
-        .write("SHUTDOWN\n".as_bytes())
+        .write_all("SHUTDOWN\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let _ = thread.await.expect("Server ended in error!");
@@ -59,7 +59,7 @@ async fn client_test_errors() {
 
     let mut buf = [0; 128];
     stream
-        .write("GET aoeu\n".as_bytes())
+        .write_all("GET aoeu\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let len = stream
@@ -74,7 +74,7 @@ async fn client_test_errors() {
     );
 
     stream
-        .write("GET 1000\n".as_bytes())
+        .write_all("GET 1000\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let len = stream
@@ -88,7 +88,7 @@ async fn client_test_errors() {
     );
 
     stream
-        .write("GET aoeu\n".as_bytes())
+        .write_all("GET aoeu\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let len = stream
@@ -103,7 +103,7 @@ async fn client_test_errors() {
     );
 
     stream
-        .write("THIS_COMMAND_DOES_NOT_EXIST\n".as_bytes())
+        .write_all("THIS_COMMAND_DOES_NOT_EXIST\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let len = stream
@@ -117,7 +117,7 @@ async fn client_test_errors() {
         .await
         .expect("Failed to connect to server");
     stream
-        .write("SHUTDOWN\n".as_bytes())
+        .write_all("SHUTDOWN\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let _ = thread.await.expect("Server ended in error!");
@@ -138,7 +138,7 @@ async fn single_client_quit() {
         .await
         .expect("Failed to connect to server");
     stream
-        .write("QUIT\n".as_bytes())
+        .write_all("QUIT\n".as_bytes())
         .await
         .expect("Failed to write to socket");
 
@@ -147,7 +147,7 @@ async fn single_client_quit() {
         .expect("Failed to connect to server");
 
     stream
-        .write("SHUTDOWN\n".as_bytes())
+        .write_all("SHUTDOWN\n".as_bytes())
         .await
         .expect("Failed to write to socket");
     let _ = thread.await.expect("Server ended in error!");
