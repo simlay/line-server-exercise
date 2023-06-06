@@ -80,7 +80,7 @@ impl LineServer {
 async fn main() -> Result<(), anyhow::Error> {
     let args = LineServer::parse();
     env_logger::init();
-    let _ = args.run().await?;
+    args.run().await?;
     Ok(())
 }
 
@@ -141,7 +141,7 @@ async fn handle_client(
             tx.send(Messages::Quit(client_id))?;
             return Ok(());
         } else {
-            stream.write(
+            let _ = stream.write(
                format!("Err - {command} is an invalid command. `GET nnnn | QUIT | SHUTDOWN` are valid commands.\r\n").as_bytes()).await?;
         }
         command = String::new();
