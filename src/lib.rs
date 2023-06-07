@@ -113,9 +113,10 @@ async fn handle_client(
             }
             if let Some(line_num_string) = command.next() {
                 info!("Retrieving line num {line_num_string}");
-                match line_num_string.parse::<u16>() {
+                match line_num_string.parse::<usize>() {
                     Ok(line_num) => {
-                        if let Some(line) = lines.get(line_num as usize) {
+                        let line_num = line_num - 1;
+                        if let Some(line) = lines.get(line_num) {
                             stream
                                 .write_all(format!("Ok\r\n{line}\r\n").as_bytes())
                                 .await?;
