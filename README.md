@@ -15,6 +15,11 @@ readable.
     - In the event that the `GET nnnn` command is out of bounds for the number of lines in the input text, something like `Err - failed to retrieve line 1000. There are only 4 lines available.\r\n`
     - In the event that the `GET nnnn` has an unparsible `usize` digit or is not a digit something like `Err - invalid digit found in string. Is AOEU an unsigned integer or under usize::MAX?\r\n` will be returned.
 
+# Requirements
+To run this you'll need [the rust
+toolchain](https://www.rust-lang.org/tools/install) and either `socat` (my
+recommendation), `netcat` or maybe `telnet`.
+
 # Usage
 
 In one terminal run:
