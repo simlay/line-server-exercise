@@ -1,6 +1,5 @@
-
-use line_server_exercise::LineServer;
 use clap::Parser;
+use line_server_exercise::LineServer;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
