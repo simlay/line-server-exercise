@@ -4,7 +4,7 @@ use tokio::io::AsyncReadExt;
 
 #[tokio::test]
 async fn single_client_test() {
-    let port = PORT + 1;
+    let port = DEFAULT_PORT + 1;
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), port);
     let server = LineServer {
         line_file: PathBuf::from("./example.txt"),
@@ -43,7 +43,7 @@ async fn single_client_test() {
 
 #[tokio::test]
 async fn client_test_errors() {
-    let port = PORT + 2;
+    let port = DEFAULT_PORT + 2;
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), port);
     let server = LineServer {
         line_file: PathBuf::from("./example.txt"),
@@ -125,7 +125,7 @@ async fn client_test_errors() {
 
 #[tokio::test]
 async fn single_client_quit() {
-    let port = PORT + 3;
+    let port = DEFAULT_PORT + 3;
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), port);
     let server = LineServer {
         line_file: PathBuf::from("./example.txt"),
