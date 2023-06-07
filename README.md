@@ -13,7 +13,7 @@ this was not descriptive enough and so the responses for Errors are more human
 readable.
     - In the event of an known command, `Err - THIS_COMMAND_DOES_NOT_EXIST is an invalid command. \`GET nnnn | QUIT | SHUTDOWN\` are valid commands.\r\n`
     - In the event that the `GET nnnn` command is out of bounds for the number of lines in the input text, something like `Err - failed to retrieve line 1000. There are only 4 lines available.\r\n`
-    - In the event that the `GET nnnn` has an unparsible `u16` digit or is not a digit something like `Err - invalid digit found in string. Is AOEU an unsigned integer under 65536?\r\n` will be returned.
+    - In the event that the `GET nnnn` has an unparsible `usize` digit or is not a digit something like `Err - invalid digit found in string. Is AOEU an unsigned integer or under usize::MAX?\r\n` will be returned.
 
 # Usage
 
@@ -58,3 +58,16 @@ Q: What third-party libraries or other tools does the system use?
 
 Q: How long did you spend on this exercise?
 * ~3 hours.
+
+
+# Future work
+
+Given that this is purely an exercise, I elected not to build out too many
+features. I played around with using
+[criterion](https://bheisler.github.io/criterion.rs/book/getting_started.html)
+to use of `cargo bench` but found the tooling a bit more complicated than I
+wanted for this project.
+
+This application looks to just be using one core. There is a
+`one_hundred_clients` test where there are 100 clients requesting 400 lines of
+a `40000` line file with little addition to CI runtime.
